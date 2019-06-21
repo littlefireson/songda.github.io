@@ -601,9 +601,13 @@
                                                 }
                                             }
                                             that.flag = false;
-                                            alert('成功');
+
                                             that.randomNumber();
-                                            $('.toCanvas').click();
+                                            alert('成功');
+                                            setTimeout(function(){
+                                              $('.toCanvas').click();
+                                            }, 2000);
+
                                         }
                                     ).catch(function (error) {
                                         alert(error);
