@@ -124,6 +124,31 @@
 
     <div class="baseContainer">
         <div class="flex-container">
+                <div class="flex-container">
+                        <div class="col-sm-3">
+                            <span>用户名</span>
+                            <input type="text" v-model="userName">
+                        </div>
+                        <div class="col-sm-3">
+                            <span>密码</span>
+                            <input type="password" v-model="psd">
+                        </div>
+                        <div class="col-sm-3">
+                            <button v-on:click='sendSms'>
+                                <span>发送验证码</span>
+                            </button>
+                        </div>
+                        <div class="col-sm-3">
+                                <img v-if='smsFlag' v-bind:src='smsUrl' />
+                        </div>
+                        <div class="col-sm-3">
+                            <span>验证码</span>
+                            <input type="text" v-model="sms">
+                        </div>
+                        <div class="col-sm-3">
+                            <button  v-on:click="login">登录</button>
+                        </div> 
+                    </div>
                 <div class="col-sm-3">
                     <span>access_token</span>
                     <input type="text" v-model="token">
@@ -544,32 +569,32 @@
                 }
 
             },
-            // login:function(){
-            //     axios({
-            //         method:'post',
-            //         url:`https://www.e-arbitral.org.cn/uaa/oauth/token`,
-            //         headers:{
-            //             'Content-Type':'application/x-www-form-urlencoded',
-            //             'Authorization':'Basic YnJvd3Nlcjo='
-            //         },
-            //         data:{//参数
-            //             scope:'ui',
-            //             username:'15321344334',
-            //             password:'hahaha123',
-            //             grant_type:'password',
-            //             user_type:'PARTY',
-            //             img_code:this.sms
-            //         },
-            //         transformRequest: [function (data) {
-            //             // return qs.stringify(data);
-            //             console.log(data);
-            //         }]
-            //     }).then((response)=>{
-            //         var token = response.data.access_token;
-            //         console.log(token)
-            //         // this.getUserInfo(token,'/');
-            //     })
-            // },
+            login:function(){
+                axios({
+                    method:'post',
+                    url:`https://www.e-arbitral.org.cn/uaa/oauth/token`,
+                    headers:{
+                        'Content-Type':'application/x-www-form-urlencoded',
+                        'Authorization':'Basic YnJvd3Nlcjo='
+                    },
+                    data:{//参数
+                        scope:'ui',
+                        username:'15321344334',
+                        password:'hahaha123',
+                        grant_type:'password',
+                        user_type:'PARTY',
+                        img_code:this.sms
+                    },
+                    transformRequest: [function (data) {
+                        // return qs.stringify(data);
+                        console.log(data);
+                    }]
+                }).then((response)=>{
+                    var token = response.data.access_token;
+                    console.log(token)
+                    // this.getUserInfo(token,'/');
+                })
+            },
             test:function(){
                 var caseNo = this.caseNo;
                 var token = this.token;
